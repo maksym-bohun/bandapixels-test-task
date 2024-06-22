@@ -3,7 +3,7 @@
 import { PostInterface } from "@/app/page";
 import React from "react";
 import styled from "styled-components";
-import Post from "./Post";
+import Post from "./Post.component";
 
 const PostsList: React.FC<{
   posts: PostInterface[];
