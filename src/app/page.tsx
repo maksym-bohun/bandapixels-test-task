@@ -1,3 +1,4 @@
+import { CommentInterface } from "@/components/CommentsModal.component";
 import Home from "@/components/Home.component";
 import PostsList from "@/components/PostsList.component";
 
@@ -6,6 +7,7 @@ export interface PostInterface {
   userId: number;
   title: string;
   body: string;
+  comments?: CommentInterface[];
 }
 
 export default async function HomePage() {

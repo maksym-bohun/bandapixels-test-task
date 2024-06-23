@@ -6,16 +6,19 @@ import styled from "styled-components";
 import { GoCommentDiscussion, GoHeart, GoHeartFill } from "react-icons/go";
 
 import { usePostsStore } from "@/store/posts.store";
+import CommentsModal from "./CommentsModal.component";
 
 const PostContainer: React.FC<PostInterface> = ({
   title,
   userId,
   body,
   id,
+  comments,
 }) => {
   const likedPosts = usePostsStore((state) => state.likedPosts);
   const togglePostHandler = usePostsStore((state) => state.toggleFavorite);
   const [postIsLiked, setPostIsLiked] = useState(false);
+  const [commentsModalIsOpened, setCommentsModalIsOpened] = useState(false);
 
   useEffect(() => {
     if (likedPosts.find((post) => post.id === id)) {
@@ -29,29 +32,49 @@ const PostContainer: React.FC<PostInterface> = ({
     togglePostHandler({ title, userId, body, id });
   };
 
+  const openCommentsHandler = () => {
+    setCommentsModalIsOpened(true);
+  };
+
+  const closeModalHandler = () => {
+    setCommentsModalIsOpened(false);
+  };
+
   return (
-    <Container>
-      <div>Author id: {userId}</div>
-      <div>Title: {title}</div>
-      <div>Body: {body}</div>
-      <ActionsContainer>
-        {!postIsLiked && (
-          <GoHeart
+    <>
+      <Container>
+        <div>Author id: {userId}</div>
+        <div>Title: {title}</div>
+        <div>Body: {body}</div>
+        <ActionsContainer>
+          {!postIsLiked && (
+            <GoHeart
+              size={40}
+              onClick={toggleLikeHandler}
+              style={{ cursor: "pointer" }}
+            />
+          )}
+          {postIsLiked && (
+            <GoHeartFill
+              size={40}
+              onClick={toggleLikeHandler}
+              style={{ cursor: "pointer" }}
+            />
+          )}
+          <GoCommentDiscussion
             size={40}
-            onClick={toggleLikeHandler}
             style={{ cursor: "pointer" }}
+            onClick={openCommentsHandler}
           />
-        )}
-        {postIsLiked && (
-          <GoHeartFill
-            size={40}
-            onClick={toggleLikeHandler}
-            style={{ cursor: "pointer" }}
-          />
-        )}
-        <GoCommentDiscussion size={40} />
-      </ActionsContainer>
-    </Container>
+        </ActionsContainer>
+      </Container>
+      <CommentsModal
+        postId={id}
+        comments={comments}
+        modalIsOpened={commentsModalIsOpened}
+        closeModalHandler={closeModalHandler}
+      />
+    </>
   );
 };
 
