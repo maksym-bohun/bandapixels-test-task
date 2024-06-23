@@ -17,7 +17,7 @@ const CommentsModal: React.FC<{
   comments: CommentInterface[] | undefined;
   modalIsOpened: boolean;
   closeModalHandler: () => void;
-}> = ({ postId, comments, modalIsOpened, closeModalHandler }) => {
+}> = ({ comments, modalIsOpened, closeModalHandler }) => {
   const customStyles = {
     content: {
       maxWidth: "600px",
