@@ -1,15 +1,15 @@
 "use client";
 
 import { PostInterface } from "@/app/page";
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Post from "./Post.component";
+import { usePostsStore } from "@/store/posts.store";
 
 const PostsList: React.FC<{
   posts: PostInterface[];
-  userAvatarColors: { [key: number]: string };
-}> = ({ posts, userAvatarColors }) => {
-  console.log("userAvatarColors", userAvatarColors);
+}> = ({ posts }) => {
+  const avatarColors = usePostsStore((state) => state.postAuthorAvatarColor);
 
   return (
     <Container>
@@ -20,7 +20,7 @@ const PostsList: React.FC<{
           userId={post.userId}
           title={post.title}
           body={post.body}
-          avatarColor={userAvatarColors[post.userId]}
+          avatarColor={avatarColors[post.userId]}
         />
       ))}
     </Container>
