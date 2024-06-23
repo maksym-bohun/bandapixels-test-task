@@ -36,7 +36,6 @@ const CommentsModal: React.FC<{
     <Container>
       <Modal
         isOpen={modalIsOpened}
-        // onAfterOpen={afterOpenModal}
         onRequestClose={closeModalHandler}
         style={customStyles}
         contentLabel="Example Modal"
@@ -45,6 +44,9 @@ const CommentsModal: React.FC<{
         {comments?.map((comment) => {
           return <Comment key={comment.id} {...comment} />;
         })}
+        <ButtonContainer>
+          <Button onClick={closeModalHandler}>Return</Button>
+        </ButtonContainer>
       </Modal>
     </Container>
   );
@@ -61,4 +63,17 @@ const Header = styled.h1`
   margin: 15px 0 30px;
   font-size: 22px;
   font-weight: 600;
+`;
+
+const Button = styled.button`
+  text-align: center;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
 `;
