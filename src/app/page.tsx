@@ -18,10 +18,11 @@ export default async function HomePage() {
   return (
     <>
       <Head>
-        <title>Home Page</title> <Home posts={posts} />
-        <meta name="description" content="This is the home page of our app." />
+        <title>Home Page</title>
+        <meta name="description" content="This is the home page of our blog." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+      <Home posts={posts} />
     </>
   );
 }

@@ -77,6 +77,11 @@ const Container = styled.div`
   grid-template-columns: 1fr 8fr 1fr;
   gap: 20px;
   cursor: pointer;
+
+  @media (max-width: 850px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
 `;
 
 const AvatarContainer = styled.div`
